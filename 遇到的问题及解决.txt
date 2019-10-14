@@ -1,0 +1,1 @@
+watch handler failed, since Plugin umi-plugin-react can't be resolved和watch handler failed, since plugin d:/front/react/antd-course/node_modules/umi-plugin-react/lib/index.js not found，重新npm run dev一下
