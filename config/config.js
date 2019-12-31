@@ -2,7 +2,8 @@ export default {
     singular: true,
     plugins: [
         ['umi-plugin-react', {
-          antd: true
+          antd: true,
+          dva: true
         }],
     ],
     routes: [{ // 配置式路由
@@ -25,6 +26,7 @@ export default {
               { path: '/dashboard/workplace', component: 'Dashboard/Workplace' }
             ]
           },
+          { path: 'puzzlecards', component: './puzzlecards' },
         ]
       }],
 }
