@@ -29,4 +29,11 @@ export default {
           { path: 'puzzlecards', component: './puzzlecards' },
         ]
       }],
+    proxy: {
+      '/dev': {
+        target: "http://jsonplaceholder.typicode.com",
+        changeOrigin: true,
+        pathRewrite: { "^/dev": "" } // 把 dev 重写掉
+      }
+    }
 }
