@@ -3,7 +3,10 @@ export default {
     plugins: [
         ['umi-plugin-react', {
           antd: true,
-          dva: true
+          dva: true,
+          // locale: {
+          //   enable: true,
+          // }
         }],
     ],
     routes: [{ // 配置式路由
