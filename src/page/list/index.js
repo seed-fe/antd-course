@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Table, Modal, Button, Form, Input } from 'antd';
+import SampleChart from '../../component/SampleChart';
 
 const FormItem = Form.Item;
 class List extends React.Component {
   state = {
     visible: false,
+    statisticVisible: false,
+    id: null,
   };
     columns = [
       {
@@ -21,40 +24,63 @@ class List extends React.Component {
         dataIndex: 'url',
         render: value => <a href={value}>{value}</a>,
       },
+      {
+        title: '',
+        dataIndex: '_',
+        render: (_, { id }) => {
+          return (
+            <Button onClick={() => { this.showStatistic(id); }}>图表</Button>
+          );
+        },
+      },
     ];
     
     // ...
     componentDidMount() {
-        this.props.dispatch({
-          type: 'cards/queryList',
-        });
-      }
-      showModal = () => {
-        this.setState({ visible: true });
-      };
-      handleCancel = () => {
-        this.setState({
-          visible: false,
-        });
-      }
-      handleOk = () => {
-        const { dispatch, form: { validateFields } } = this.props;
-      
-        validateFields((err, values) => {
-          if (!err) {
-            dispatch({
-              type: 'cards/addOne',
-              payload: values,
-            });
-            // 重置 `visible` 属性为 false 以关闭对话框
-            this.setState({ visible: false });
-          }
-        });
-      }
+      this.props.dispatch({
+        type: 'cards/queryList',
+      });
+    }
+    
+    showModal = () => {
+      this.setState({ visible: true });
+    };
+    handleCancel = () => {
+      this.setState({
+        visible: false,
+      });
+    }
+    handleOk = () => {
+      const { dispatch, form: { validateFields } } = this.props;
+    
+      validateFields((err, values) => {
+        if (!err) {
+          dispatch({
+            type: 'cards/addOne',
+            payload: values,
+          });
+          // 重置 `visible` 属性为 false 以关闭对话框
+          this.setState({ visible: false });
+        }
+      });
+    }
+    showStatistic = (id) => {
+      this.props.dispatch({
+        type: 'cards/getStatistic',
+        payload: id,
+      });
+      // 更新 state，弹出包含图表的对话框
+      this.setState({ id, statisticVisible: true });
+    };
+  
+    handleStatisticCancel = () => {
+      this.setState({
+        statisticVisible: false,
+      });
+    }
     render() {
-      const { cardsList, cardsLoading } = this.props;
-      const { visible } = this.state;
-      const { form: { getFieldDecorator } } = this.props;
+      const { cardsList, cardsLoading, form: { getFieldDecorator }, statistic } = this.props;
+      const { visible, statisticVisible, id } = this.state;
       console.log(this.props);
       // console.log(form)
       console.log(getFieldDecorator)
@@ -68,28 +94,31 @@ class List extends React.Component {
             onOk={this.handleOk}
             onCancel={this.handleCancel}
           >
-          <Form>
-            <FormItem label="名称">
-              {getFieldDecorator('name', {
-                rules: [{ required: true }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-            <FormItem label="描述">
-              {getFieldDecorator('desc')(
-                <Input />
-              )}
-            </FormItem>
-            <FormItem label="链接">
-              {getFieldDecorator('url', {
-                rules: [{ type: 'url' }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-          </Form>
-        </Modal>
+            <Form>
+              <FormItem label="名称">
+                {getFieldDecorator('name', {
+                  rules: [{ required: true }],
+                })(
+                  <Input />
+                )}
+              </FormItem>
+              <FormItem label="描述">
+                {getFieldDecorator('desc')(
+                  <Input />
+                )}
+              </FormItem>
+              <FormItem label="链接">
+                {getFieldDecorator('url', {
+                  rules: [{ type: 'url' }],
+                })(
+                  <Input />
+                )}
+              </FormItem>
+            </Form>
+          </Modal>
+          <Modal visible={statisticVisible} footer={null} onCancel={this.handleStatisticCancel}>
+            <SampleChart data={statistic[id]} />
+          </Modal>
         </div>
       );
     }
@@ -100,6 +129,7 @@ function mapStateToProps(state) {
     return {
       cardsList: state.cards.cardsList,
       cardsLoading: state.loading.effects['cards/queryList'],
+      statistic: state.cards.statistic,
     };
   }
   
