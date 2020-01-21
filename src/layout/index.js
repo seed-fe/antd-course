@@ -15,7 +15,11 @@ export default class BasicLayout extends Component {
     return (
       <Layout>
         <Sider width={256} style={{ minHeight: '100vh' }}> // 整个视口是100vh
-          <div style={{ height: '32px', background: 'rgba(255,255,255,.2)', margin: '16px'}}/>
+          <div style={{ height: '32px', background: 'rgba(255,255,255,.2)', margin: '16px', textAlign: 'center', lineHeight: '32px'}}>
+          <Link to="/">
+                <span>antd-course</span>
+              </Link>
+            </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
               <Link to="/helloworld">
@@ -36,13 +40,25 @@ export default class BasicLayout extends Component {
               <Icon type="book" />
               <span>Puzzlecards</span>
             </Link>
-          </Menu.Item>
-            <Menu.Item key="3">
-            <Link to="/list">
-              <Icon type="table" />
-              <span>List</span>
-            </Link>
-          </Menu.Item>
+            </Menu.Item>
+              <Menu.Item key="3">
+              <Link to="/list">
+                <Icon type="table" />
+                <span>List</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="4">
+              <Link to="/css-modules-with-less">
+                <Icon type="table" />
+                <span>Less</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="5">
+              <Link to="/css-modules-with-antd">
+                <Icon type="table" />
+                <span>Override</span>
+              </Link>
+            </Menu.Item>
           </Menu>
           
         </Sider>
