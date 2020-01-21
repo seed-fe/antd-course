@@ -54,6 +54,14 @@ export default {
           path: 'list',
           component: './list',
         },
+        {
+          path: 'css-modules-with-less',
+          component: './css-modules-with-less',
+        },
+        {
+          path: 'css-modules-with-antd',
+          component: './css-modules-with-antd',
+        },
       ],
     },
   ],
