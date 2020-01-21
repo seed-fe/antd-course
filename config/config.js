@@ -18,6 +18,10 @@ export default {
       component: '../layout',
       routes: [
         {
+          path: '/locale',
+          component: './locale',
+        },
+        {
           path: '/',
           component: './index',
         },
@@ -62,6 +66,10 @@ export default {
           path: 'css-modules-with-antd',
           component: './css-modules-with-antd',
         },
+        {
+          path: 'locale',
+          component: './locale',
+        },
       ],
     },
   ],
@@ -75,6 +83,6 @@ export default {
     },
   },
   theme: {
-    "@primary-color": "#30b767",
-  }
+    '@primary-color': '#30b767',
+  },
 };

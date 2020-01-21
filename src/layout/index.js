@@ -59,6 +59,12 @@ export default class BasicLayout extends Component {
                 <span>Override</span>
               </Link>
             </Menu.Item>
+            <Menu.Item key="6">
+              <Link to="/locale">
+                <Icon type="table" />
+                <span>locale</span>
+              </Link>
+            </Menu.Item>
           </Menu>
           
         </Sider>
