@@ -1,11 +1,13 @@
-
-import myStyles from './index.css';
-
-const lang = window.navigator.language;
-/* index.jsx */
+import {
+  FormattedMessage,
+  formatMessage,
+} from 'umi/locale';
+// src/page/HelloWorld.js
+console.log(formatMessage(
+  {
+    id: 'helloworld',
+  },
+));
 export default () => {
-  const helloworld = lang === 'en-US' ? 'hello world' : '你好';
-  return (
-    <div className={myStyles.hello}>{helloworld}</div>
-  );
-};
+  return <div><FormattedMessage id="helloworld" /></div>;
+}

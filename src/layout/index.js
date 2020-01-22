@@ -3,8 +3,8 @@
 import { Component } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import Link from 'umi/link'
-
-
+import GlobalHeader from "../component/GlobalHeader";
+import logo from '../assets/logo.svg';
 const { Header, Footer, Sider, Content } = Layout; // 这是es6中的解构赋值
 
 // 引入子菜单组件
@@ -69,7 +69,19 @@ export default class BasicLayout extends Component {
           
         </Sider>
         <Layout >
-          <Header style={{ background: '#fff', textAlign: 'center', padding: 0 }}>Header</Header>
+        <Header style={{ padding: 0 }}>
+            <GlobalHeader
+              logo={logo}
+              // collapsed={collapsed}
+              currentUser={{
+                name: 'Serati Ma',
+                avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+                userid: '00000001',
+                notifyCount: 12,
+              }}
+              onCollapse={this.handleMenuCollapse}
+            />
+          </Header>
           <Content style={{ margin: '24px 16px 0' }}>
             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
               {this.props.children}
